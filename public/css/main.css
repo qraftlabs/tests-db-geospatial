@@ -1,0 +1,25 @@
+@import "../packages/bootstrap/css/bootstrap.css";
+@import "../packages/bootstrap/css/bootstrap-responsive.css";
+@import "../packages/chosen/chosen/chosen.css";
+@import "unicorn.main.css";
+@import "unicorn.grey.css";
+@import "uniform.css";
+@import "site.css";
+
+#map-container {
+  height: 85%;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067);
+  background-color: #FFFFFF;
+}
+
+#map-container img {
+  max-width: none;
+}
+
+#map-container label{
+  display: inline;
+}

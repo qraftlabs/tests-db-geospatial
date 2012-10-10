@@ -1,0 +1,3 @@
+--require ./lib/configurate
+--require should
+--reporter list

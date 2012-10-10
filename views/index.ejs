@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>S4</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" type="text/css" href="/css/main.css" />    
+</head>
+<body>
+  <div id="header">
+    <h1><a href="#/"><strong>S4</strong> Panel</a></h1>    
+  </div>
+  <div id="userbar" class="navbar">
+    <ul class="nav btn-group">
+      <li class="btn btn-inverse" ><a title="" href="#/profile"><i class="icon icon-user"></i> <span class="text">John Smith</span></a></li>
+      <li class="btn btn-mini btn-inverse"><a href="#/settings"><i class="icon icon-cog"></i> <span class="text">Settings</span></a></li>
+      <li class="btn btn-mini btn-inverse"><a href="#/logout"><i class="icon icon-share-alt"></i> <span class="text">Logout</span></a></li>
+    </ul>
+  </div>
+  <div id="sidebar">
+    <a href="#" class="visible-phone"><i class="icon icon-home"></i> Dashboard</a>
+    <ul>
+      <li class="active">
+        <a href="#/">
+          <i class="icon icon-home"></i> <span>Dashboard</span>
+        </a>
+      </li>
+      <li>
+        <a href="#/fields">
+          <i class="icon icon-briefcase"></i> 
+          <span>Fields</span><span class="label">2</span>
+        </a>
+      </li>
+      <li><a href="#/Users"><i class="icon icon-user"></i> <span>Users</span><span class="label">2</span></a></li>
+      <li><a href="#/audit"><i class="icon icon-time"></i> <span>Audit</span></a></li>
+      <li><a href="#/sdk"><i class="icon icon-book"></i> <span>SDK</span></a></li>
+      <li><a href="#/api"><i class="icon icon-th"></i> <span>API</span></a></li>
+      </ul>
+    </div>    
+    <div id="content">
+      <!-- sections -->
+      <% include sections/dashboard %>
+      <% include sections/fields %>
+      <!-- end sections -->
+    </div>
+  </div>
+</div>
+
+<script src="/js/vendor/openlayers/OpenLayers.js"></script>
+<script src="http://maps.google.com/maps/api/js?v=3&amp;sensor=false"></script>
+<script src="/packages/require.js"></script>
+<script type="text/javascript">
+require(["js/manager.js"], function(manager){ });
+</script>
+
+</body>
+</html>

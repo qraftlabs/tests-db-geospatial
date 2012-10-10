@@ -1,15 +1,44 @@
-define([], function(){
+define(["jquery"], function($){
+
+
   var load = function() {
+    var fieldsLayer = new OpenLayers.Layer.Vector("Fields");
+
     var gsat = new OpenLayers.Layer.Google(
       "Google Satellite",
       {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
-    ), map = new OpenLayers.Map({
+    );
+
+    map = new OpenLayers.Map({
       div: "map-container",
       projection: "EPSG:3857",
-      layers: [gsat]
+      layers: [gsat, fieldsLayer]
     });
+
     map.addControl(new OpenLayers.Control.LayerSwitcher());
-    map.setCenter(null, 1, false, false);
+    map.setCenter(new OpenLayers.LonLat(
+                      -7058013.6529284, 
+                      -3587715.2414932), 15, false, false);
+    
+
+    $.ajax({
+      url: "/api/fields",
+      cache: false,
+      success: function(fields){
+        fields.forEach(function(f){
+          var points = f.points.map(function(point){
+            return new OpenLayers.Geometry.Point(point.lon, point.lat);
+          });
+          var linearRing = new OpenLayers.Geometry.LinearRing(points);
+          var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
+
+          fieldsLayer.addFeatures([new OpenLayers.Feature.Vector(geometry)]);
+        });
+      }
+    });
+    
+    
+
   };
 
   return {

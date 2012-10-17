@@ -4,7 +4,7 @@
   "description": "solapa 4",
   "main": "index.js",
   "scripts": {
-    "test": "db='mongodb://localhost/auth11_tests' mocha",
+    "test": "mocha",
     "postinstall": "node build.js",
     "start": "node server.js"
   },
@@ -26,7 +26,8 @@
     "jamjs": "~0.2.8",
     "loggly": "~0.3.11",
     "winston-loggly": "~0.6.0",
-    "winston": "~0.6.2"
+    "winston": "~0.6.2",
+    "pg": "~0.8.4"
   },
   "jam": {
     "packageDir": "public/packages",

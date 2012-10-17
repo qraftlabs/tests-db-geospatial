@@ -1,6 +1,5 @@
 define(["jquery"], function($){
 
-
   var load = function() {
     var fieldsLayer = new OpenLayers.Layer.Vector("Fields");
 
@@ -8,6 +7,7 @@ define(["jquery"], function($){
       "Google Satellite",
       {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
     );
+    var coordinatesProjection = new OpenLayers.Projection("EPSG:4326");
 
     map = new OpenLayers.Map({
       div: "map-container",
@@ -26,9 +26,13 @@ define(["jquery"], function($){
       cache: false,
       success: function(fields){
         fields.forEach(function(f){
-          var points = f.points.map(function(point){
-            return new OpenLayers.Geometry.Point(point.lon, point.lat);
+          var points = f.geometry.coordinates[0].map(function(points){
+            return new OpenLayers.Geometry.Point(points[0], points[1])
+              .transform(coordinatesProjection, map.getProjectionObject());
           });
+          map.setCenter(new OpenLayers.LonLat(
+                      points[0].x, 
+                      points[0].y), 15, false, false);
           var linearRing = new OpenLayers.Geometry.LinearRing(points);
           var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
 
@@ -36,7 +40,6 @@ define(["jquery"], function($){
         });
       }
     });
-    
     
 
   };

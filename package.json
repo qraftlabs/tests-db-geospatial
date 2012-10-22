@@ -24,8 +24,6 @@
     "ejs-amd": "0.0.1",
     "rimraf": "~2.0.2",
     "jamjs": "~0.2.8",
-    "loggly": "~0.3.11",
-    "winston-loggly": "~0.6.0",
     "winston": "~0.6.2",
     "pg": "~0.8.4"
   },

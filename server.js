@@ -9,7 +9,7 @@ var express = require("express"),
   nconf = require("nconf");
 
 var app = express();
-
+ 
 app.configure(function(){
   this.set("view engine", "ejs");
   this.set("views", __dirname + "/views");

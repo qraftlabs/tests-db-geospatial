@@ -30,6 +30,13 @@ app.configure("development", function(){
   }));
 });
 
+//blitz
+app.get("/mu-ce0c72d3-1109bfe1-3fe5c3a0-239ff0f2", function (req, res) {
+  res.send("42");
+});
+//end blitz
+
+
 routes(app);
 
 var port = process.env.port || 8989;

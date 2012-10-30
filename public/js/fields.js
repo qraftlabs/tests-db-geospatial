@@ -40,7 +40,6 @@ define(["jquery"], function($){
         });
       }
     });
-    
 
   };
 

@@ -1,7 +1,7 @@
 define(["jquery",
 		"/js/router.js",
 		"/js/dashboard.js",
-		"/js/fields.js",
+		"/js/routes/layers.js",
 		"/js/lib/jquery.validate.js",
 		"/js/lib/jquery.uniform.js",
 		"/packages/chosen/chosen/chosen.jquery.js",
@@ -16,9 +16,9 @@ define(["jquery",
 		"/packages/bootstrap/js/bootstrap-scrollspy.js",
 		"/packages/bootstrap/js/bootstrap-tab.js",
 		"/packages/bootstrap/js/bootstrap-transition.js",
-		"/packages/bootstrap/js/bootstrap-typeahead.js"], function($, router, dashboard, fields) {
+		"/packages/bootstrap/js/bootstrap-typeahead.js"], function($, router, dashboard, layers) {
   
-	router.init([dashboard, fields]);
+	router.init([dashboard, layers]);
 	$('select').chosen();
 
 });

@@ -3,14 +3,18 @@ define(["jquery"], function ($) {
   var coordinatesProjection = new OpenLayers.Projection("EPSG:4326");
 
 
-  OpenLayers.Layer.prototype.drawPostGisPolygon = function (polygon, attribs) {
+  OpenLayers.Layer.prototype.drawPostGisPolygon = function (polygon, attribs, focusPolygon) {
     var points = polygon.map(function(points){
       return new OpenLayers.Geometry.Point(points[0], points[1])
         .transform(coordinatesProjection, map.getProjectionObject());
     });
-    map.setCenter(new OpenLayers.LonLat(
-                points[0].x, 
-                points[0].y), 15, false, false);
+
+    if (focusPolygon) {
+      map.setCenter(new OpenLayers.LonLat(
+                  points[0].x, 
+                  points[0].y), 13, false, false);
+    }
+
     var linearRing = new OpenLayers.Geometry.LinearRing(points);
     var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
     var feature = new OpenLayers.Feature.Vector(geometry);
@@ -19,14 +23,14 @@ define(["jquery"], function ($) {
     this.addFeatures([feature]);
   };
 
-  OpenLayers.Layer.prototype.drawPostGisGeometry = function (geometry, attribs) {
+  OpenLayers.Layer.prototype.drawPostGisGeometry = function (geometry, attribs, focusGeometry) {
     var self = this;
     if (geometry.type === "MultiPolygon") {
       geometry.coordinates[0].forEach(function (polygon) {
-        self.drawPostGisPolygon(polygon, attribs);
+        self.drawPostGisPolygon(polygon, attribs, focusGeometry);
       });
     } else if (geometry.type === "Polygon") {
-      self.drawPostGisPolygon(geometry.coordinates[0], attribs);
+      self.drawPostGisPolygon(geometry.coordinates[0], attribs, focusGeometry);
     }
   };
 

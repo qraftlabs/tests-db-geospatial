@@ -28,7 +28,7 @@ define(["jquery",
       success: function(fields){
         //draw all the fields for this operator
         fields.forEach(function(f){
-          fieldsLayer.drawPostGisGeometry(f.geometry, {name: f.name});
+          fieldsLayer.drawPostGisGeometry(f.geometry, {name: f.name}, true);
         });
         //**************************************
       }

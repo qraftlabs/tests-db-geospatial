@@ -1,47 +1,40 @@
-define(["jquery"], function($){
+define(["jquery", 
+        "/js/map.js"], function($, map){
 
-  var load = function() {
-    var fieldsLayer = new OpenLayers.Layer.Vector("Fields");
+  function load () {
+    
+    var layerStyle = new OpenLayers.StyleMap({'default':{
+      strokeColor: "#00FFF0",
+      strokeOpacity: 1,
+      strokeWidth: 0.7,
+      fillColor: "#FF5500",
+      fillOpacity: 0.4,
+      label : "${name}",
+      fontSize: "12px",
+      labelOutlineColor: "white",
+      labelOutlineWidth: 2
+    }});
 
-    var gsat = new OpenLayers.Layer.Google(
-      "Google Satellite",
-      {type: google.maps.MapTypeId.SATELLITE, numZoomLevels: 22}
-    );
-    var coordinatesProjection = new OpenLayers.Projection("EPSG:4326");
-
-    map = new OpenLayers.Map({
-      div: "map-container",
-      projection: "EPSG:3857",
-      layers: [gsat, fieldsLayer]
+    //create the fields layer
+    var fieldsLayer = new OpenLayers.Layer.Vector("Fields", {  
+      styleMap: layerStyle
     });
 
-    map.addControl(new OpenLayers.Control.LayerSwitcher());
-    map.setCenter(new OpenLayers.LonLat(
-                      -7058013.6529284, 
-                      -3587715.2414932), 15, false, false);
-    
+    map.addLayer(fieldsLayer);
 
     $.ajax({
       url: "/api/fields",
       cache: false,
       success: function(fields){
+        //draw all the fields for this operator
         fields.forEach(function(f){
-          var points = f.geometry.coordinates[0].map(function(points){
-            return new OpenLayers.Geometry.Point(points[0], points[1])
-              .transform(coordinatesProjection, map.getProjectionObject());
-          });
-          map.setCenter(new OpenLayers.LonLat(
-                      points[0].x, 
-                      points[0].y), 15, false, false);
-          var linearRing = new OpenLayers.Geometry.LinearRing(points);
-          var geometry = new OpenLayers.Geometry.Polygon([linearRing]);
-
-          fieldsLayer.addFeatures([new OpenLayers.Feature.Vector(geometry)]);
+          fieldsLayer.drawPostGisGeometry(f.geometry, {name: f.name});
         });
+        //**************************************
       }
     });
 
-  };
+  }
 
   return {
     routes: { "/fields": load  }

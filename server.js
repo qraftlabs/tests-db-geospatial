@@ -18,9 +18,14 @@ var app = express();
 app.configure(function(){
   this.set("view engine", "ejs");
   this.set("views", __dirname + "/views");
+  this.set('json spaces', 0);
+  
+  this.use(express.compress());
+
   this.use(express.logger('dev'));
   this.use(express.bodyParser());
   this.use(express.static(__dirname  + "/public"));
+  this.use(express.methodOverride());
 });
 
 app.configure("development", function(){

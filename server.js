@@ -36,7 +36,7 @@ app.configure("development", function(){
 });
 
 //blitz
-app.get("/mu-ce0c72d3-1109bfe1-3fe5c3a0-239ff0f2", function (req, res) {
+app.get("/mu-8313f9bf-9c03f615-cce7738e-86c7fd83", function (req, res) {
   res.send("42");
 });
 //end blitz

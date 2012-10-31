@@ -1,7 +1,7 @@
-// require('nodetime').profile({
-//   accountKey: 'f068f9d4d7a614f68945af7fd6e3ce6adc2f7f12', 
-//   appName: 'solapa 4'
-// });
+require('nodetime').profile({
+  accountKey: 'f068f9d4d7a614f68945af7fd6e3ce6adc2f7f12', 
+  appName: 'solapa 4'
+});
 
 require("./lib/configurate");
 require("./lib/setupLogger");

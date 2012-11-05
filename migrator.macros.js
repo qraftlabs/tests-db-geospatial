@@ -5,7 +5,7 @@ var getMongoConnection = require("./lib/mongo");
 
 getPostgresConnection(function(conn){
   conn.query("select gid,(ST_AsGeoJSON(the_geom)) as geometry, denominacion as name, idoperador as operator" + 
-              " from layerseditables.macroambientes limit 10000 offset 20000", function (err, result){
+              " from layerseditables.macroambientes limit 20000 offset 10000", function (err, result){
     
     if(err) return console.log("error connecting to postgres", err);
     

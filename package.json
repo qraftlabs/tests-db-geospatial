@@ -28,7 +28,8 @@
     "winston-loggly": "~0.6.0",
     "winston": "~0.6.2",
     "pg": "~0.8.4",
-    "nodetime": "~0.4.7"
+    "nodetime": "~0.4.7",
+    "riak-js": "~0.4.1"
   },
   "jam": {
     "packageDir": "public/packages",
